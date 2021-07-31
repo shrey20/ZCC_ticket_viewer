@@ -22,5 +22,26 @@ def test_list_api_call(capsys):
     captured = capsys.readouterr()
     assert captured.out[:72] == "Check if the url entered is correct. 404 Client Error: Not Found for url"
 
+def test_list_reformat(capsys):
+    obj = ticket_viewer()
+
+    response = obj.list_api_call()
+    if response:
+        data_frame = obj.list_reformat(response.json())
+        if not data_frame.empty:
+            if set(['id', 'created_at', 'subject', 'priority', 'status', 'description']).issubset(data_frame.columns):
+                assert True
+            else:
+                assert False
+
+        response = None
+        obj.list_reformat(response)
+        captured = capsys.readouterr()
+        assert captured.out == "No tickets available to show!\n"
+
+
+
+
+
 
 
