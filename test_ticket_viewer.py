@@ -60,7 +60,6 @@ def test_single_api_call(capsys):
     """
     Checks if single_api_call returns correct response for a given id
     :param capsys: Captures stdout and stderr
-    :return:
     """
     obj1 = ticket_viewer()
     obj2 = ticket_viewer(pwd="abcd")
