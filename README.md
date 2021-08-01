@@ -5,8 +5,8 @@ A CLI application using python to view ticket data for zccstudentshelp subdomain
 Download ticket_viewer and test_ticket_viewer, please make sure to download them in the same directory. 
 Create a python environment, install the packages listed in requirements.txt.
 
-##Usage
-###Application:
+## Usage
+### Application:
       Using terminal: Go to the directory where you downloaded the files and type python3 ticket_viewer.py
       Using IDE: Create a project. Load the downloaded files. Right click ticket_viewer.py from the project files panel on left
       and click on run. For more information [click here](https://realpython.com/run-python-scripts/#how-to-run-python-scripts-from-an-ide-or-a-text-editor).
