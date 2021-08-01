@@ -7,12 +7,12 @@ Create a python environment, install the packages listed in requirements.txt.
 
 ## Usage
 ### Application
-      Using terminal: Go to the directory where you downloaded the files and type python3 ticket_viewer.py
-      Using IDE: Create a project. Load the downloaded files. Right click ticket_viewer.py from the project file panel on left and click on run. 
+Using terminal: Go to the directory containing the files and type python3 ticket_viewer.py
+Using IDE: Right click ticket_viewer.py from project files panel and click on run. 
 For more information [click here](https://realpython.com/run-python-scripts/#how-to-run-python-scripts-from-an-ide-or-a-text-editor).
 
 
 ### Tests
-  Using terminal: Go to the directory contaong the files and type pytest.
+  Using terminal: Go to the directory containing the files and type python3 pytest.
   Using IDE: Right click test_ticket_viewer.py from project files panel and click on run. 
   For more information on running tests in pyCharm [click here](https://www.jetbrains.com/help/pycharm/pytest.html#run-pytest-test).
