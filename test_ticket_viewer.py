@@ -115,6 +115,35 @@ def test_single_api_call(capsys):
         assert "HTTP error occurred: 401 Client Error:" in captured.out
 
 
+def test_display_single(capsys):
+    """
+    Checks if the correct output is displayed for given data
+    :param capsys: Captures stdout and stderr
+    """
+
+    obj1 = ticket_viewer()
+
+    response = obj1.single_api_call(1)
+    if response:
+        obj1.display_single(response.json())
+        captured = capsys.readouterr()
+        assert "id: 1" in captured.out
+
+    response = obj1.single_api_call(10)
+    if response:
+        obj1.display_single(response.json())
+        captured = capsys.readouterr()
+        assert "id: 10" in captured.out
+
+    response = obj1.single_api_call(50)
+    if response:
+        obj1.display_single(response.json())
+        captured = capsys.readouterr()
+        assert "id: 50" in captured.out
+
+
+
+
 
 
 
