@@ -3,7 +3,10 @@ A CLI application using python to view ticket data for zccstudentshelp subdomain
 
 ## Installation
 Download ticket_viewer and test_ticket_viewer, please make sure to download them in the same directory.<br/>
-Create a python environment, install the packages listed in requirements.txt.
+Create a python environment, install the packages listed in requirements.txt. <br/>
+If you are running without using virtual environment set the environmental variables using .bash_profile (shared via email), 
+if you are using virtual environment download the files in runConfigurations. For more infomation [click here](https://www.jetbrains.com/help/pycharm/run-debug-configuration.html#share-configurations) </br>
+If some issues arise in setting up the environmental variables, please contact me via email -> shreyanssakhlecha@gmail.com
 
 ## Usage
 ### Application
@@ -14,5 +17,4 @@ For more information [click here](https://realpython.com/run-python-scripts/#how
 
 ### Tests
   Using terminal: Go to the directory containing the files and type python3 pytest.<br/>
-  Using IDE: Right click test_ticket_viewer.py from project files panel and click on run.<br/>
-  For more information on running tests in pyCharm [click here](https://www.jetbrains.com/help/pycharm/pytest.html#run-pytest-test).
+  Using IDE:  For information on running tests in pyCharm [click here](https://www.jetbrains.com/help/pycharm/pytest.html#run-pytest-test).
