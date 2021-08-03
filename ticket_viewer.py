@@ -1,3 +1,4 @@
+import os
 import requests
 from requests.exceptions import HTTPError
 import json
@@ -6,16 +7,20 @@ from tabulate import tabulate
 import re
 import textwrap
 
+
 class ticket_viewer:
     """An object representation for ticket viewer application"""
 
-    def __init__(self, user= 'shreyanssakhlecha@gmail.com' + '/token', pwd = 'Qapoz3sFCneeu2cLFzEWGJoQufPkR17xolryrnmR'):
+
+    def __init__(self, user=os.environ.get('zcc_user') + '/token', pwd=os.environ.get('zcc_pwd1')):
         """Initializes a ticket_viewer object with credentials for user and token"""
         self.user = user
         self.pwd = pwd
 
 
-    def list_api_call(self, url= 'https://zccstudentshelp.zendesk.com/api/v2/tickets.json', param = {'page[size]':'25'}):
+
+
+    def list_api_call(self, url='https://zccstudentshelp.zendesk.com/api/v2/tickets.json', param={'page[size]': '25'}):
         """Sends a get request to get the list of tickets
           :param url: api endpoint to access the list of tickets
                  param: Parameters for params field  of requests.get
@@ -28,7 +33,7 @@ class ticket_viewer:
             response.raise_for_status()
             return response
 
-        #Handles exceptions
+        # Handles exceptions
         except HTTPError as http_err:
             if response.status_code == 400:
                 print(f'Bad request, make sure you typed everything correctly. {http_err}')
@@ -44,7 +49,7 @@ class ticket_viewer:
 
 
         except Exception as err:
-                print(f'Other error occurred: {err}')
+            print(f'Other error occurred: {err}')
 
 
 
@@ -55,7 +60,6 @@ class ticket_viewer:
 
         """
 
-
         def wrap(row):
             """ Formats the data so that it wraps around while displaying
                 :param row: ticket description
@@ -64,7 +68,7 @@ class ticket_viewer:
             return '\n'.join(re.findall('.{1,60}', row))
 
         if response_json:
-            df =pd.DataFrame(response_json['tickets'])
+            df = pd.DataFrame(response_json['tickets'])
 
             if not df.empty:
                 df.fillna("Unknown", inplace=True)
@@ -135,7 +139,7 @@ class ticket_viewer:
             response.raise_for_status()
             return response
 
-        #Handle exceptions
+        # Handle exceptions
         except HTTPError as http_err:
             if response.status_code == 404:
                 print("Please enter a valid ticket id.")
@@ -147,14 +151,15 @@ class ticket_viewer:
             print(f'Other error occurred: {err}')
 
 
+
     def display_single(self, response_json):
         """
-        Displays the selected information for the ticket
+        Displays the selected information for the ticket, handels missing values
         :param response_json(dictionary): ticket data
         """
         data = response_json['ticket']
 
-        print("id: {0:d}".format(data['id'])) if data['id'] else print("id: Unknown")
+        print("id: {0:d}".format(data['id']))
         print("created at: {0:s}".format(data['created_at'])) if data['created_at'] else print("created_at: Unknown")
         print("subject: {0:s}".format(data['subject'])) if data['subject'] else print("subject: Unknown")
         print("priority: {0:s}".format(data['priority'])) if data['priority'] else print("priority: Unknown")
@@ -208,5 +213,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
