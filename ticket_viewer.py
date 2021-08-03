@@ -71,6 +71,8 @@ class ticket_viewer:
             df = pd.DataFrame(response_json['tickets'])
 
             if not df.empty:
+                
+                # Replaces missing values with "Unknown" and formats description to wrap around
                 df.fillna("Unknown", inplace=True)
                 data = df.loc[:, ['id', 'created_at', 'subject', 'priority', 'status', 'description']]
                 desc_wraped = data.description.apply(wrap)
@@ -101,12 +103,12 @@ class ticket_viewer:
             if x in ['next', 'prev']:
                 if response_json['meta']['has_more']:
                     new_url = response_json['links'][x]
-                    move = self.list_api_call(new_url)
+                    move = self.list_api_call(new_url) #calls list_api_call to get information for the next or prev page 
 
                     if move:
                         response_json = move.json()
-                        data = self.list_reformat(move.json())
-                        print(tabulate(data, headers="keys", tablefmt='fancy_grid'))
+                        data = self.list_reformat(move.json()) # reformats the data
+                        print(tabulate(data, headers="keys", tablefmt='fancy_grid')) # prints the data in tabular format
 
 
                 else:
@@ -169,6 +171,7 @@ class ticket_viewer:
             print("Description: Unknown")
 
         else:
+            # display the description in a paragraph format
             desc_wrap = textwrap.wrap(data['description'], width=70)
             print("description:")
 
@@ -187,26 +190,32 @@ def main():
         print("Enter 1: To view a single ticket (requires id)")
         print("Enter 2: To view a list of tickets")
         print("Enter 3: To exit")
+        
         user_input = input("Choose option:")
 
         if user_input == "1":
             tick_id = int(input("Please enter ticket id:"))
             response = obj.single_api_call(tick_id)
+            
             if response:
                 obj.display_single(response.json())
 
         elif user_input == "2":
             response = obj.list_api_call()
+            
             if response:
                 data = obj.list_reformat(response.json())
+                
                 if not data.empty:
                     print(tabulate(data, headers="keys", tablefmt='fancy_grid'))
                     obj.display_list(response.json())
 
+        
         elif user_input == "3":
             print("Closing application!")
             return
 
+        
         else:
             print("Please choose a valid option")
 
